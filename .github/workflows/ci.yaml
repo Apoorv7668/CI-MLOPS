@@ -31,7 +31,7 @@ jobs:
       # Step 4: Run DVC pipeline
       - name: Run DVC pipeline
         env:
-          DAGSHUB_TOKEN:${{secrets.DAGSHUB_TOKEN}}
+          DAGSHUB_TOKEN: ${{secrets.DAGSHUB_TOKEN}}
         run: |
           source venv/bin/activate
           dvc repro
