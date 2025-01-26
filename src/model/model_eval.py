@@ -16,15 +16,30 @@ from mlflow.models import infer_signature
 # Initialize DagsHub for experiment tracking
 # Initialize DagsHub for experiment tracking
 # dagshub.init(repo_owner='bhattpriyang', repo_name='mlops_project', mlflow=True)
-dagshub.init(repo_owner='Apoorv7668', repo_name='CI-MLOPS', mlflow=True)
+# dagshub.init(repo_owner='Apoorv7668', repo_name='CI-MLOPS', mlflow=True)
 
 
-# Set the experiment name in MLflow
+# # Set the experiment name in MLflow
 
-mlflow.set_experiment("DVC PIPELINE ")
+# mlflow.set_experiment("fINAL MODEL ")
 
-# Set the tracking URI for MLflow to log the experiment in DagsHub
-mlflow.set_tracking_uri("https://dagshub.com/Apoorv7668/CI-MLOPS.mlflow") 
+# # Set the tracking URI for MLflow to log the experiment in DagsHub
+# mlflow.set_tracking_uri("https://dagshub.com/Apoorv7668/CI-MLOPS.mlflow") 
+
+import os
+dagshub_token =os.getenv("DAGSHUB_TOKEN")
+if not dagshub_token:
+    raise EnvironmentError("DAGSHUB token not available")
+
+os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
+
+
+dagshub_url = "https://dagshub.com"
+repo_owner = "Apoorv7668"
+repo_name = "CI-MLOPS"
+mlflow.set_tracking_uri(f"{dagshub_url}/{repo_owner}/{repo_name}.mlflow")
+mlflow.set_experiment("fINAL MODEL ")
 
 
 #mlflow.set_experiment("water-potability-prediction")
